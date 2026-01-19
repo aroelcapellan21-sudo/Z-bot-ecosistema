@@ -3,32 +3,33 @@ from flask import Flask
 from threading import Thread
 import telebot
 
-# 1. Servidor para que Render se ponga en "Live" (Verde)
+# Servidor para mantener a Render despierto
 app = Flask('')
 
 @app.route('/')
 def home():
-    return "Ecosistema Z-Bot: Activo y Reportando."
+    return "Z-Bot está despierto"
 
 def run():
-    # Render usa el puerto 10000 por defecto
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=10000)
 
-# 2. Tu Bot con el Token que ya conocemos
-TOKEN = "7547012921:AAH8N_8F07i9XbW28D3m4T1h_W56N63M4pY"
-bot = telebot.TeleBot(TOKEN)
-
-@bot.message_handler(commands=['status'])
-def send_status(message):
-    bot.reply_to(message, "✅ Ecosistema Reportando: Todo funciona correctamente. El sistema está estable y en línea.")
-
-# 3. Función para ejecutar el servidor y el bot al mismo tiempo
 def keep_alive():
     t = Thread(target=run)
     t.start()
 
+# --- TUS TOKENS CONFIGURADOS ---
+TOKEN = "7547196020:AAFvjQ63B2C9v_78524Iu-8N68B8lH6M_9M"
+bot = telebot.TeleBot(TOKEN)
+
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    bot.reply_to(message, "¡Z-Bot Despierta! Estoy activo y a tus órdenes, Yayo.")
+
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+    bot.reply_to(message, "Recibido. Estamos probando la estabilidad antes de la lógica de trading.")
+
 if name == "main":
     keep_alive()
-    print("Bot encendido y reportando...")
+    print("Bot encendido...")
     bot.infinity_polling()

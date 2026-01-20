@@ -10,7 +10,8 @@ def home():
     return "Z-Bot Vivo"
 
 def run():
-    app.run(host='0.0.0.0', port=10000)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
 
 def keep_alive():
     t = Thread(target=run)
@@ -25,5 +26,5 @@ def send_welcome(message):
 
 if __name__ == "__main__":
     keep_alive()
-    print("Bot encendido correctamente...")
-    bot.infinity_polling()
+    bot.infinity_polling(none_stop=True)
+    

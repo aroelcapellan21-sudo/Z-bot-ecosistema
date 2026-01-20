@@ -7,7 +7,7 @@ app = Flask('')
 
 @app.route('/')
 def home():
-    return "Z-Bot Vivo"
+    return "Z-Bot Blindado"
 
 def run():
     puerto = int(os.environ.get("PORT", 10000))
@@ -16,13 +16,13 @@ def run():
 def keep_alive():
     Thread(target=run).start()
 
-# PEGA EL NUEVO TOKEN DENTRO DE LAS COMILLAS
-TOKEN = "7991523120:AAFNbwFDhtpm0ziyNfBDLs9KXrB_r3Fs110"
+# Esta línea es la magia: busca el Token secreto en Render
+TOKEN = os.environ.get("TELEGRAM_TOKEN")
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start', 'socia'])
 def welcome(message):
-    bot.reply_to(message, "¡Z-Bot Despierta! Activo para Yayo y Socia.")
+    bot.reply_to(message, "¡Z-Bot Blindado! Activo para Yayo y Socia.")
 
 if __name__ == "__main__":
     keep_alive()

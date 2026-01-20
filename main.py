@@ -29,7 +29,7 @@ def send_welcome(message):
 def echo_all(message):
     bot.reply_to(message, "Recibido. Estamos probando la estabilidad antes de la lógica de trading.")
 
-if name == "main":
+if __name__ == "__main__":
     keep_alive()
     print("Bot encendido...")
     bot.infinity_polling()

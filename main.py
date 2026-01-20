@@ -1,7 +1,7 @@
 import os
+import telebot
 from flask import Flask
 from threading import Thread
-import telebot
 
 app = Flask('')
 
@@ -27,4 +27,3 @@ def send_welcome(message):
 if __name__ == "__main__":
     keep_alive()
     bot.infinity_polling(none_stop=True)
-    

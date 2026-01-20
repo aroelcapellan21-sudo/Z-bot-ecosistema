@@ -23,7 +23,7 @@ bot = telebot.TeleBot(TOKEN)
 def send_welcome(message):
     bot.reply_to(message, "¡Z-Bot Despierta! Estoy activo y a tus órdenes, Yayo y Socia.")
 
-if name == "main":
+if __name__ == "__main__":
     keep_alive()
     print("Bot encendido correctamente...")
     bot.infinity_polling()
